@@ -772,7 +772,7 @@ class Home extends React.Component<State, any>{
 
                                 <IonItem  mode="ios" lines="none">
                                     <IonLabel><IonText className="text-small">{i18n.t("telegram")}</IonText></IonLabel>
-                                    <IonText><a href="https://0.plus/Sero_CoinH" className="text-small">Sero_CoinH</a></IonText>
+                                    <IonText><a href="https://0.plus/Sero_CoinHi" className="text-small">Sero_CoinHi</a></IonText>
                                 </IonItem>
                             </IonList>
 
