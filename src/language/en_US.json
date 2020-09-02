@@ -66,7 +66,7 @@
   "releaseRule": "1SERO unfreeze",
   "returned": "Returned",
 
-  "sourceUrl": "https://github.com/conspay/coinh/blob/master/src/contract/contract.sol",
-  "sourceText": "https://github.com/conspay/coinh/src/contract/contract.sol",
+  "sourceUrl": "https://github.com/conspay/coinhi/blob/master/src/contract/contract.sol",
+  "sourceText": "https://github.com/conspay/coinhi/src/contract/contract.sol",
   "contractAddress": "Contract Address"
 }

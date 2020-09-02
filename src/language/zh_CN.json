@@ -66,8 +66,8 @@
   "releaseRule": "1SERO解冻",
   "returned": "已回本",
 
-  "sourceUrl": "https://gitee.com/conspay/coinh/blob/master/src/contract/contract.sol",
-  "sourceText": "https://gitee.com/conspay/coinh/src/contract/contract.sol",
+  "sourceUrl": "https://gitee.com/conspay/coinhi/blob/master/src/contract/contract.sol",
+  "sourceText": "https://gitee.com/conspay/coinhi/src/contract/contract.sol",
   "contractAddress": "合约地址"
 
 }
