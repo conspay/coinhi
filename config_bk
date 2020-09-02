@@ -1,0 +1,20 @@
+[core]
+	repositoryformatversion = 0
+	filemode = true
+	bare = false
+	logallrefupdates = true
+	ignorecase = true
+	precomposeunicode = true
+[user]
+	email = conspay@protonmail.com
+	name = conspay
+[remote "origin"]
+	url = https://conspay@github.com/conspay/coinhi.git
+	fetch = +refs/heads/*:refs/remotes/origin/*
+[remote "gitee"]
+         url = https://conspay@gitee.com/conspay/coinhi.git
+         fetch = +refs/heads/*:refs/remotes/origin/*
+
+[branch "master"]
+	remote = gitee
+	merge = refs/heads/master
