@@ -301,6 +301,9 @@ class Home extends React.Component<State, any>{
         contract.investByCode(account,detail && detail.code?detail.code:code,cy,toValue(amount)).then(hash=>{
             this.setShowModalDeposit(false);
             this.toast(hash)
+            this.setState({
+                amount:""
+            })
         }).catch(err=>{
             this.toast(err)
         })
@@ -383,6 +386,9 @@ class Home extends React.Component<State, any>{
         contract.withdraw(account,amount,selectedCoin === "SERO").then((hash:any)=>{
             this.toast(hash)
             this.setShowModalWithdraw(false)
+            this.setState({
+                amountWithdraw:""
+            })
         }).catch((e)=>{
             this.toast(e)
         })
@@ -445,6 +451,9 @@ class Home extends React.Component<State, any>{
                 // setTimeout(()=>{
                 //     window.location.href="/"
                 // },1500)
+                this.setState({
+                    amountProxy:""
+                })
             }).catch(e =>{
                 this.toast(e)
             })
@@ -785,7 +794,10 @@ class Home extends React.Component<State, any>{
                                 {/*<IonIcon icon={rocketOutline} style={{color:"#fad579"}} slot="start"/>*/}
                                 <IonLabel><span className="text-small">{i18n.t("myCode")}</span></IonLabel>
                                 <IonBadge className="text-small" color="medium">{detail && detail.code}</IonBadge>
-                                {detail && detail.code?<IonIcon icon={copyOutline} size="small" color="medium"  onClick={()=>{copy(detail.code);this.toast(i18n.t("copySuccess"))}}/>:""}
+                                {detail && detail.code?<IonIcon icon={copyOutline} size="small" color="medium"  onClick={()=>{
+                                    copy(detail.code);
+                                    copy(detail.code);
+                                    this.toast(i18n.t("copySuccess"))}}/>:""}
                             </IonItem>
                             <IonItem  mode="ios">
                                 {/*<IonIcon icon={rocketOutline} style={{color:"#fad579"}} slot="start"/>*/}
