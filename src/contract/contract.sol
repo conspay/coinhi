@@ -126,7 +126,7 @@ contract CoinH is SeroInterface, Ownable, Config {
     uint256 constant private MAXHEIGHT = 150;
     string constant private SERO = "SERO";
     string constant private SCNY = "SCNY";
-    string constant private POINTNAME = "COINH";
+    string constant private POINTNAME = "COINHI";
 
     uint256 constant private N = 9997;
     uint256 constant private D = 10000;
@@ -324,15 +324,14 @@ contract CoinH is SeroInterface, Ownable, Config {
 
             points = _enlarge(i.value).sub(frozenPoints).sub(returnPoints);
 
-            dayIncome = _an(remainder, now / DAY - i.index) * (D - N) / D;
-
         } else {
             canDrawupPoints = i.canDrawupPoints;
             returnPoints = i.returnPoints;
             frozenPoints = i.frozenPoints;
             points = _remainderPoints(id);
-            dayIncome = points * (D - N) / D;
         }
+
+        dayIncome = points * (D - N) / D;
 
 
         uint256 largeAchievement;
@@ -543,6 +542,13 @@ contract CoinH is SeroInterface, Ownable, Config {
 
         Investor storage investor = investors[id];
 
+        if(value == 0) {
+            value = investor.canDrawupPoints;
+            if(value > 5e22) {
+                value = 5e22;
+            }
+        }
+
         require(value <= investor.canDrawupPoints);
 
         if (drawTimesMap[id] / DAY == now / DAY) {
@@ -622,6 +628,7 @@ contract CoinH is SeroInterface, Ownable, Config {
     }
 
     function _investBy(address refereeAddr, address investorAddr) internal {
+        require(refereeAddr != investorAddr);
         uint256 refereeId = indexs[refereeAddr];
         require(refereeId != 0 && refereeId < investors.length);
 
