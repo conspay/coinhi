@@ -785,7 +785,7 @@ class Home extends React.Component<State, any>{
                               onDidDismiss={() => this.setShowModal(false)}
                               cssClass='my-custom-class'
                               >
-                        <IonList>
+                        <IonList style={{height:"100%",overflowY:"scroll"}}>
 
                             {/*(points + frozenPoints + returnPoints)/12.5-recommendProfit - starProfit*/}
 
@@ -861,7 +861,7 @@ class Home extends React.Component<State, any>{
                     <IonModal isOpen={showModalDeposit}
                               onDidDismiss={() => this.setShowModalDeposit(false)}
                     >
-                        <IonList>
+                        <IonList style={{height:"100%",overflowY:"scroll"}}>
                             <IonItemDivider mode="ios">{i18n.t("ratio")}</IonItemDivider>
                             <IonItem mode="ios" lines="none">
                                 {/*<IonLabel><span className="text-small">比例</span><br/></IonLabel>*/}
@@ -923,7 +923,7 @@ class Home extends React.Component<State, any>{
                     <IonModal isOpen={showModalProxy}
                               onDidDismiss={() => this.setShowModalProxy(false)}
                     >
-                        <IonList>
+                        <IonList style={{height:"100%",overflowY:"scroll"}}>
                             <IonItem mode="ios">
                                 <IonLabel><span className="text-small">{i18n.t("address")}</span><br/></IonLabel>
                                 <IonText color="medium" className="proxy-customer">{
@@ -990,7 +990,7 @@ class Home extends React.Component<State, any>{
                               onDidDismiss={() => this.setShowModalWithdraw(false)}
                     >
 
-                        <IonList>
+                        <IonList style={{height:"100%",overflowY:"scroll"}}>
                             <IonItemDivider mode="ios">{i18n.t("ratio")}</IonItemDivider>
                             <IonItem mode="ios">
                                 <IonText color="dark" className="text-small">
@@ -1047,7 +1047,7 @@ class Home extends React.Component<State, any>{
                               onDidDismiss={() => this.setShowModalDetail(false)}
                     >
 
-                        <IonList className="text-center">
+                        <IonList className="text-center" style={{height:"100%",overflowY:"scroll"}}>
 
                             <IonItemDivider mode="ios">{i18n.t("auctionRule")}</IonItemDivider>
                             <IonRow>
@@ -1094,17 +1094,15 @@ class Home extends React.Component<State, any>{
                                     </IonRow>
                                 }))
                             }
-
-                            <IonRow style={{marginTop:"24px"}}>
-                                <IonCol size="4">
-                                    <IonButton mode="ios" onClick={() => this.setShowModalDetail(false)} expand="block" fill="outline" color="danger">{i18n.t("cancel")}</IonButton>
-                                </IonCol>
-                                <IonCol size="8">
-                                    <IonButton mode="ios" onClick={() => this.runLottery()} expand="block" disabled={!showButton}>{!showButton?<div className="countdown">{formatDate(b)}</div>:i18n.t("getReward")}</IonButton>
-                                </IonCol>
-                            </IonRow>
-
                         </IonList>
+                        <IonRow style={{marginTop:"24px"}}>
+                            <IonCol size="4">
+                                <IonButton mode="ios" onClick={() => this.setShowModalDetail(false)} expand="block" fill="outline" color="danger">{i18n.t("cancel")}</IonButton>
+                            </IonCol>
+                            <IonCol size="8">
+                                <IonButton mode="ios" onClick={() => this.runLottery()} expand="block" disabled={!showButton}>{!showButton?<div className="countdown">{formatDate(b)}</div>:i18n.t("getReward")}</IonButton>
+                            </IonCol>
+                        </IonRow>
                     </IonModal>
 
                     <IonAlert
