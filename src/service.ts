@@ -14,10 +14,9 @@ class Service {
     }
 
     async rpc(method:string, args:any){
-        let host = localStorage.getItem("host");
+        let host:any = localStorage.getItem("host");
         if(!host){
-            await this.initDApp();
-            host = localStorage.getItem("host");
+            host = await this.initDApp();
         }
         const data: any = {
             id: this.id++,
@@ -25,9 +24,7 @@ class Service {
             params: args
         }
         return new Promise((resolve, reject) => {
-            if(!host){
-                reject(new Error("rpc unset !"))
-            }else{
+            if(host){
                 axios.post(host, data).then((resp: any) => {
                     if(resp.data && resp.data.error){
                         reject(resp.data.error.message)
@@ -37,6 +34,8 @@ class Service {
                 }).catch(e => {
                     reject(e)
                 })
+            }else{
+                reject()
             }
         })
     }
@@ -70,7 +69,7 @@ class Service {
                             });
                         }
 
-                        resolve()
+                        resolve(data.rpc)
                     })
                 }
             })

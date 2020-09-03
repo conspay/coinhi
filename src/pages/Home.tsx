@@ -203,7 +203,7 @@ class Home extends React.Component<State, any>{
 
     async genQRCode(account:any){
         let canvas = document.getElementById('canvas')
-        if(canvas){
+        if(canvas && account && account.MainPKr){
             QRCode.toCanvas(canvas, window.location.origin + window.location.pathname + "#/"+account.MainPKr,{width:168,height:168}, function (error:any) {
                 if (error) console.error(error)
                 console.log('success!');
