@@ -530,7 +530,7 @@ class Home extends React.Component<State, any>{
         })
     }
     render(): React.ReactNode {
-        const {account,accounts,showPopover,showModal,showModalDeposit,detail,winnersInfo,
+        let {account,accounts,showPopover,showModal,showModalDeposit,detail,winnersInfo,
             checkAccount,checkAccountPoints,code,amount,showToast,toastMsg,showModalProxy,showModalWithdraw,
             selectedCoin,amountWithdraw,showModalDetail,checkAccountSUSD,radio,amountProxy,selectedProxyCoin,showAlert,showAlertExchange} = this.state;
 
@@ -585,6 +585,10 @@ class Home extends React.Component<State, any>{
         }
 
         let showRadio = <>1SERO = {new BigNumber(radio[0]).dividedBy(radio[1]).toFixed(4,1)} {coink}</>
+
+        if(!account){
+            account = {}
+        }
 
         return (
             <IonPage>
@@ -795,8 +799,8 @@ class Home extends React.Component<State, any>{
                                 <IonLabel><span className="text-small">{i18n.t("myCode")}</span></IonLabel>
                                 <IonBadge className="text-small" color="medium">{detail && detail.code}</IonBadge>
                                 {detail && detail.code?<IonIcon icon={copyOutline} size="small" color="medium"  onClick={()=>{
-                                    copy(detail.code);
-                                    copy(detail.code);
+                                    copy(detail?detail.code:"");
+                                    copy(detail?detail.code:"");
                                     this.toast(i18n.t("copySuccess"))}}/>:""}
                             </IonItem>
                             <IonItem  mode="ios">
@@ -1072,8 +1076,8 @@ class Home extends React.Component<State, any>{
                                 winnersInfo&& winnersInfo.winnerCodes.map(((v,i)=>{
                                     return <IonRow>
                                         <IonCol size="4" className="text-small"><IonText color="dark" className="text-small">{v.slice(0,3)+"..."+v.slice(v.length-3)}</IonText></IonCol>
-                                        <IonCol size="4" className="text-small"><IonText color="dark" className="text-small">{fromValue(winnersInfo.winnerRewards[i]).toFixed(4,1)}</IonText></IonCol>
-                                        <IonCol size="4" className="text-small"><IonText color="dark" className="text-small">{fromValue(winnersInfo.winnerShareValues[i]).toFixed(4,1)}</IonText></IonCol>
+                                        <IonCol size="4" className="text-small"><IonText color="dark" className="text-small">{fromValue(winnersInfo&&winnersInfo.winnerRewards[i]).toFixed(4,1)}</IonText></IonCol>
+                                        <IonCol size="4" className="text-small"><IonText color="dark" className="text-small">{fromValue(winnersInfo&&winnersInfo.winnerShareValues[i]).toFixed(4,1)}</IonText></IonCol>
                                     </IonRow>
                                 }))
                             }
@@ -1089,8 +1093,8 @@ class Home extends React.Component<State, any>{
                                 winnersInfo&& winnersInfo.topSixCodes.map(((v,i)=>{
                                     return <IonRow>
                                         <IonCol size="4" className="text-small"><IonText color="dark" className="text-small">{v.slice(0,3)+"..."+v.slice(v.length-3)}</IonText></IonCol>
-                                        <IonCol size="4" className="text-small"><IonText color="dark" className="text-small">{fromValue(winnersInfo.topSixRewards[i]).toFixed(4,1)}</IonText></IonCol>
-                                        <IonCol size="4" className="text-small"><IonText color="dark" className="text-small">{fromValue(winnersInfo.topSixShareValues[i]).toFixed(4,1)}</IonText></IonCol>
+                                        <IonCol size="4" className="text-small"><IonText color="dark" className="text-small">{fromValue(winnersInfo&&winnersInfo.topSixRewards[i]).toFixed(4,1)}</IonText></IonCol>
+                                        <IonCol size="4" className="text-small"><IonText color="dark" className="text-small">{fromValue(winnersInfo&&winnersInfo.topSixShareValues[i]).toFixed(4,1)}</IonText></IonCol>
                                     </IonRow>
                                 }))
                             }
