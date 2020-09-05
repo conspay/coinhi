@@ -104,31 +104,42 @@ class Home extends React.Component<State, any>{
 
     componentDidMount(): void {
         const that = this;
-        document.body.classList.toggle('dark', true);
-        service.initDApp().catch()
+        try{
+            document.body.classList.toggle('dark', true);
+            service.initDApp().catch()
 
-        // @ts-ignore
-        const address:string = this.props.match.params.address;
-        if(address){
-            this.setShowModalProxy(true);
+            // @ts-ignore
+            const address:string = this.props.match.params.address;
+            if(address){
+                this.setShowModalProxy(true);
+            }
+
+            let intervalId:any = sessionStorage.getItem("intervalId");
+            if(intervalId){
+                clearInterval(intervalId);
+            }
+
+            that.getAccounts().then(()=>{
+                // that.getDetail().then()
+
+                intervalId = setInterval(function () {
+                    that.getDetail().then(()=>{
+                        that.getAccountDetail()
+                    }).catch((e)=>{
+                        const err = typeof e === "object" ? e.message:e;
+                        that.toast(err);
+                    })
+                },10*1000);
+
+                sessionStorage.setItem("intervalId",intervalId)
+            }).catch((e)=>{
+                const err = typeof e === "object" ? e.message:e;
+                this.toast(err);
+            })
+        }catch (e) {
+            this.toast(e.message)
         }
 
-        let intervalId:any = sessionStorage.getItem("intervalId");
-        if(intervalId){
-            clearInterval(intervalId);
-        }
-
-        that.getAccounts().then(()=>{
-            // that.getDetail().then()
-
-            intervalId = setInterval(function () {
-                that.getDetail().then(()=>{
-                    that.getAccountDetail()
-                })
-            },10*1000);
-
-            sessionStorage.setItem("intervalId",intervalId)
-        })
         //for test
     }
 
@@ -147,7 +158,7 @@ class Home extends React.Component<State, any>{
     async getAccounts(){
         const that = this;
 
-        const cacheMainPKr = localStorage.getItem("account")
+        const cacheMainPKr:any = localStorage.getItem("account")
         seropp.getAccountList(function (accounts:any) {
             let act:any;
             for(let data of accounts){
@@ -173,8 +184,14 @@ class Home extends React.Component<State, any>{
                 accounts:accounts
             })
             setTimeout(()=>{
-                that.genQRCode(act).catch()
-                // that.getDetail(act).then()
+                that.genQRCode(act).catch((e)=>{
+                    const err = typeof e === "object" ? e.message:e;
+                    that.toast(err);
+                })
+                that.getDetail(act).then().catch((e)=>{
+                    const err = typeof e === "object" ? e.message:e;
+                    that.toast(err);
+                })
             },200)
         })
     }
@@ -224,8 +241,14 @@ class Home extends React.Component<State, any>{
             account:value,
             showPopover:false
         })
-        this.getDetail(value);
-        this.genQRCode(value).then()
+        this.getDetail(value).catch((e)=>{
+            const err = typeof e === "object" ? e.message:e;
+            this.toast(err);
+        });
+        this.genQRCode(value).then().catch((e)=>{
+            const err = typeof e === "object" ? e.message:e;
+            this.toast(err);
+        })
     }
 
     setShowModal = (f:boolean) =>{
