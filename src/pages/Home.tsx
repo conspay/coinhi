@@ -119,7 +119,7 @@ class Home extends React.Component<State, any>{
         }
 
         that.getAccounts().then(()=>{
-            that.getDetail().then()
+            // that.getDetail().then()
 
             intervalId = setInterval(function () {
                 that.getDetail().then(()=>{
@@ -174,8 +174,8 @@ class Home extends React.Component<State, any>{
             })
             setTimeout(()=>{
                 that.genQRCode(act).catch()
-                that.getDetail(act).then()
-            },100)
+                // that.getDetail(act).then()
+            },200)
         })
     }
 
