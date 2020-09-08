@@ -189,6 +189,7 @@ class Contract {
             service.rpc("sero_estimateGas",[params]).then((data:any)=>{
                 params.gas = data;
                 params.from = account.PK
+                params.gasPrice = "0x"+new BigNumber(1e9).toString(16)
                 seropp.executeContract(params, function (hash: any, err: any) {
                     if (err) {
                         reject(err)
