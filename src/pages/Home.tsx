@@ -552,6 +552,11 @@ class Home extends React.Component<State, any>{
             this.toast(err)
         })
     }
+
+    popupPage = (path:string) =>{
+        seropp.goPage(path);
+    }
+
     render(): React.ReactNode {
         let {account,accounts,showPopover,showModal,showModalDeposit,detail,winnersInfo,
             checkAccount,checkAccountPoints,code,amount,showToast,toastMsg,showModalProxy,showModalWithdraw,
@@ -653,7 +658,9 @@ class Home extends React.Component<State, any>{
 
                             </div>
                             <div className="qrbox">
-                                <div className="qr-title">
+                                <div className="qr-title" onClick={()=>{
+                                    this.popupPage("/scan/transafer")
+                                }}>
                                     <div className="icon">
                                         <div className="b"></div>
                                         <div className="h"></div>
