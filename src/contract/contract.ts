@@ -127,7 +127,7 @@ class Contract {
 
     async investByCode(account: any, code:string,cy:string,value:BigNumber): Promise<string> {
         console.log("invest",code,cy);
-        return this.execute("investByCode", [code], account,cy,"0x"+value.toString(16))
+        return this.execute("investByCode", [code.trim()], account,cy,"0x"+value.toString(16))
     }
 
     async reInvest(account: any,amount:BigNumber): Promise<string> {
